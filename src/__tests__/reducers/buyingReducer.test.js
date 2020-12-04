@@ -15,7 +15,7 @@ describe('buyingReducer', () => {
   test('Should return new state when "buying" something', () => {
     const action = {
       type: 'BUY_PART',
-      masterCartList: clone
+      masterPartList: clone
     }
     expect(buyingReducer(defaultState, action)).toEqual(testClone)
   })

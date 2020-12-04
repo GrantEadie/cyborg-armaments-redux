@@ -19,35 +19,6 @@ class BodyTypeControl extends React.Component {
       selectedPart: null,
       bodyTypeVisibleOnPage: 0,
       editing: false,
-      masterPartList: [
-      {
-        bodyType: "Vision & Auditory",
-        selection: [
-          { partName: "Heat Sensing Visual Conversion", partDescription: "See heat as a ratio of the electromagnet spectrum. Adjusts for many species.", partQuantity: 1, id: 9807, cartTotal: 1, partPrice: 499, partBodyType: "Vision & Auditory" },
-          { partName: "Gravity Pulse Auditory Sensors", partDescription: "Detects gravity particles in shield plating and converts to readable sound waves.", partQuantity: 4, id:9808, cartTotal: 1, partPrice: 377, partBodyType: "Vision & Auditory"  }
-        ]
-      },
-      {
-        bodyType: "Torso & Center Mass",
-        selection: [{ partName: "Cybernetic Core", partDescription: "Outputs 7 million gigwatts, powered by anti-matter fragments ", partQuantity: 3, id:9708, cartTotal: 1, partPrice: 46000, partBodyType: "Torso & Center Mass"  }]
-      },
-      {
-        bodyType: "Arms or Upper Appendages",
-        selection: [{ partName: "Science-Grade Nanotech Prosthetic", partDescription: "Capable of taking any form or shape using neurotransmitted data. Virtually industructable", partQuantity: 4, id:9608, cartTotal: 1, partPrice: 1800, prodBodyType: "Arms or Upper Appendages" }]
-      },
-      {
-        bodyType: "Legs or Lower Appendages",
-        selection: [{ partName: "Weapons-Grade Nanotech Prosthetic", partDescription: "Warning: this nanotech is not in accord with the Radchaii Treaty of Hyperion. Use ONLY in free-space.", partQuantity: 5, id:9508, cartTotal: 1, partPrice: 9200, partBodyType: "Legs or Lower Appendages"  }]
-      },
-      {
-        bodyType: "Neurotech and Comp Enhancements",
-        selection: [{ partName: "Terran Rayzen XI: Quantum X ", partDescription: "10 Core, 2k ghz, Quantum Chip. Urrasti Style Micro Port (base of brain stem).", partQuantity: 4, id:9408, cartTotal: 1, partPrice: 30900, partBodytype: "Neurotech and Comp Enhancements"}]
-      },
-      {
-        bodyType: "External Instruments",
-        selection: [{ partName: "Anarres Transport Scan Module", partDescription: "Detects transport traces up to 700 parsecs", partQuantity: 5, id:93581, cartTotal: 1, partPrice: 679, partBodyType: "External Instruments"  },
-        {partName: "Orian Phase Transmitter", partDescription: "Creates phase discharge at a radius of seven kilometers.", partQuantity: 5, id:9308, cartTotal: 1, partPrice: 179, partBodyType: "External Instruments"  }]
-      }]
     };
   }
 
@@ -65,7 +36,7 @@ class BodyTypeControl extends React.Component {
   handleBuyClick = (id) => {
     const { dispatch } = this.props;
     const currentCatIndex = this.props.bodyTypeVisibleOnPage;
-    const clone = [...this.state.masterPartList]
+    const clone = [...this.props.masterPartList]
     const cartClone = [...this.state.masterCartList]
     let partPrice = 0;
     for (let i = 0; i <= clone[currentCatIndex].selection.length; i++){
@@ -76,7 +47,7 @@ class BodyTypeControl extends React.Component {
           clone[currentCatIndex].selection[i].partQuantity = clone[currentCatIndex].selection[i].partQuantity -1;
 
         } else {
-          clone[currentCatIndex].selection = this.state.masterPartList[currentCatIndex].selection.filter(pro => pro.id !== id);
+          clone[currentCatIndex].selection = this.props.masterPartList[currentCatIndex].selection.filter(pro => pro.id !== id);
         }
 
 
@@ -100,13 +71,12 @@ class BodyTypeControl extends React.Component {
     
     const action0 = {
       type: 'BUY_PART',
-      masterCartList: clone
+      masterPartList: clone
     }
     dispatch(action0)
     this.setState({
       selectedPart: null,
       formVisibleOnPage:false,
-      masterPartList: clone,
       masterCartList: cartClone,
       cartTotal: this.state.cartTotal + partPrice
     });
@@ -114,8 +84,8 @@ class BodyTypeControl extends React.Component {
 
   handleEditingPartInList = (partToEdit) => {
     const currentCatIndex = this.props.bodyTypeVisibleOnPage;
-    const clone = [...this.state.masterPartList]
-    const editedSelection = this.state.masterPartList[currentCatIndex].selection
+    const clone = [...this.props.masterPartList]
+    const editedSelection = this.props.masterPartList[currentCatIndex].selection
     .filter(part => part.id !== this.state.selectedPart.id)
     .concat(partToEdit);
     clone[currentCatIndex].selection = editedSelection;
@@ -127,7 +97,7 @@ class BodyTypeControl extends React.Component {
   }
 
   handleDeleteCartPart = (oldPart) => {
-    const clone = [...this.state.masterPartList];
+    const clone = [...this.props.masterPartList];
     let newCartTotalPrice = this.state.cartTotal;
     for (let i = 0; i < clone.length; i++){
       let match = false;
@@ -180,8 +150,8 @@ class BodyTypeControl extends React.Component {
 
   handleDeletingPart = (id) => {
     const currentCatIndex = this.props.bodyTypeVisibleOnPage;
-    const clone = [...this.state.masterPartList]
-    const newSelection = this.state.masterPartList[currentCatIndex].selection.filter(pro => pro.id !== id);     
+    const clone = [...this.props.masterPartList]
+    const newSelection = this.props.masterPartList[currentCatIndex].selection.filter(pro => pro.id !== id);     
     clone[currentCatIndex].selection = newSelection;    
     this.setState({
       selectedPart: null,
@@ -228,12 +198,12 @@ class BodyTypeControl extends React.Component {
 
   handleChangingSelectedPart = (id) => {
     const currentCatIndex = this.props.bodyTypeVisibleOnPage;
-    const selectedPart = this.state.masterPartList[currentCatIndex].selection.filter(pro => pro.id === id)[0];  
+    const selectedPart = this.props.masterPartList[currentCatIndex].selection.filter(pro => pro.id === id)[0];  
     this.setState({selectedPart: selectedPart});
   }
 
   handleAddingNewPartToList = (newPart) => {
-    const clone = [...this.state.masterPartList]
+    const clone = [...this.props.masterPartList]
     const newSelection = clone[newPart.partBodyType].selection.concat(newPart);    
     clone[newPart.partBodyType].selection = newSelection;
     this.setState({
@@ -262,7 +232,7 @@ class BodyTypeControl extends React.Component {
     } else {
       currentVisibleState = <BodyTypeList
         currentIndex={this.props.bodyTypeVisibleOnPage} 
-        availableParts={this.state.masterPartList} 
+        availableParts={this.props.masterPartList} 
         onPartSelection={this.handleChangingSelectedPart}
         onBuyPart={this.handleBuyClick}
         />
@@ -302,11 +272,13 @@ class BodyTypeControl extends React.Component {
 
 BodyTypeControl.propTypes = {
   bodyTypeVisibleOnPage: PropTypes.number,
+  masterPartList: PropType.array
 }
 
 const mapStateToProps = state => {
   return {
-    bodyTypeVisibleOnPage: state.bodyTypeVisibleOnPage
+    bodyTypeVisibleOnPage: state.bodyTypeVisibleOnPage,
+    masterPartList: state.masterPartList
   }
 }
 
