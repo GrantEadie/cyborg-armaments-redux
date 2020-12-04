@@ -97,7 +97,6 @@ class BodyTypeControl extends React.Component {
     }
     dispatch(action0)
     this.setState({
-      editing: false,
       selectedPart: null
     });
   }
