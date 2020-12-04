@@ -12,9 +12,6 @@ import { connect } from 'react-redux';
 class BodyTypeControl extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedPart: null,
-    };
   }
 
   handleBodyClick = (event) => {
@@ -87,7 +84,7 @@ class BodyTypeControl extends React.Component {
     const currentCatIndex = this.props.bodyTypeVisibleOnPage;
     const clone = [...this.props.masterPartList]
     const editedSelection = this.props.masterPartList[currentCatIndex].selection
-    .filter(part => part.id !== this.state.selectedPart.id)
+    .filter(part => part.id !== this.props.selectedPart.id)
     .concat(partToEdit);
     clone[currentCatIndex].selection = editedSelection;
     const action0 = {
@@ -95,9 +92,6 @@ class BodyTypeControl extends React.Component {
       masterPartList: clone
     }
     dispatch(action0)
-    this.setState({
-      selectedPart: null
-    });
   }
 
   handleDeleteCartPart = (oldPart) => {
@@ -156,7 +150,7 @@ class BodyTypeControl extends React.Component {
 
   handleClickForm = () => {
     const { dispatch } = this.props
-    if (this.state.selectedPart != null){
+    if (this.props.selectedPart != null){
       this.setState({
         formVisibleOnPage: false,
         selectedPart: null,
@@ -172,14 +166,21 @@ class BodyTypeControl extends React.Component {
   }
 
   handleDeletingPart = (id) => {
+    const { dispatch } = this.props;
     const currentCatIndex = this.props.bodyTypeVisibleOnPage;
     const clone = [...this.props.masterPartList]
     const newSelection = this.props.masterPartList[currentCatIndex].selection.filter(pro => pro.id !== id);     
     clone[currentCatIndex].selection = newSelection;    
-    this.setState({
-      selectedPart: null,
-      formVisibleOnPage:false,
-      masterPartList: clone});    
+    const action0 = {
+      type: 'UPDATE_PART_LIST',
+      masterPartList: clone
+    }
+    dispatch(action0)
+    const action1 = {
+      type: 'SELECT_PART',
+      selectedPart: null
+    }
+    dispatch(action1)
   }  
 
   handleClickUp = () => {
@@ -220,9 +221,14 @@ class BodyTypeControl extends React.Component {
   }
 
   handleChangingSelectedPart = (id) => {
+    const { dispatch } = this.props;
     const currentCatIndex = this.props.bodyTypeVisibleOnPage;
-    const selectedPart = this.props.masterPartList[currentCatIndex].selection.filter(pro => pro.id === id)[0];  
-    this.setState({selectedPart: selectedPart});
+    const selectedPart = this.props.masterPartList[currentCatIndex].selection.filter(pro => pro.id === id)[0];
+    const action0 = {
+      type: 'SELECT_PART',
+      selectedPart: selectedPart
+    }
+    dispatch(action0)
   }
 
   handleAddingNewPartToList = (newPart) => {
@@ -247,11 +253,11 @@ class BodyTypeControl extends React.Component {
     let buttonText = null;
 
     if (this.props.editing){
-      currentVisibleState = <EditPartForm part = {this.state.selectedPart} onEditPart = {this.handleEditingPartInList} />
+      currentVisibleState = <EditPartForm part = {this.props.selectedPart} onEditPart = {this.handleEditingPartInList} />
       buttonText = "Return to Armaments";
-    } else if (this.state.selectedPart != null) {
+    } else if (this.props.selectedPart != null) {
       currentVisibleState = <PartDetail 
-      part = {this.state.selectedPart} 
+      part = {this.props.selectedPart} 
       onClickingDelete = {this.handleDeletingPart}
       onClickingEdit = {this.handleEditClick} />
       buttonText = "Return to Armaments";
@@ -306,7 +312,8 @@ BodyTypeControl.propTypes = {
   masterCartList: PropTypes.array,
   cartTotal: PropTypes.number,
   editing: PropTypes.bool,
-  formVisibleOnPageReducer: PropTypes.bool
+  formVisibleOnPageReducer: PropTypes.bool,
+  selectedPart: PropTypes.object
 }
 
 const mapStateToProps = state => {
@@ -316,7 +323,8 @@ const mapStateToProps = state => {
     masterCartList: state.masterCartList,
     cartTotal: state.cartTotal,
     editing: state.editing,
-    formVisibleOnPage: state.formVisibleOnPage
+    formVisibleOnPage: state.formVisibleOnPage,
+    selectedPart: state.selectedPart
   }
 }
 
