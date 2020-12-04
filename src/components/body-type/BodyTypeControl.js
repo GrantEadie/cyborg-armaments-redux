@@ -72,7 +72,7 @@ class BodyTypeControl extends React.Component {
     }
     dispatch(action0)
     const action1 = {
-      type: 'ADD_CART',
+      type: 'UPDATE_CART',
       masterCartList: cartClone
     }
     dispatch(action1)
@@ -103,8 +103,9 @@ class BodyTypeControl extends React.Component {
   }
 
   handleDeleteCartPart = (oldPart) => {
+    const { dispatch } = this.props;
     const clone = [...this.props.masterPartList];
-    let newCartTotalPrice = this.state.cartTotal;
+    let newCartTotalPrice = this.props.cartTotal;
     for (let i = 0; i < clone.length; i++){
       let match = false;
       for (let j = 0; j < clone[i].selection.length; j++){
@@ -127,12 +128,23 @@ class BodyTypeControl extends React.Component {
       }
 
     const newSelection = this.props.masterCartList.filter(pro => pro.id !== oldPart.id);
+    const action0 = {
+      type: 'UPDATE_PART_LIST',
+      masterPartList: clone
+    }
+    dispatch(action0)
 
-    this.setState({
-      masterPartList: clone,
-      masterCartList: newSelection,
+    const action1 = {
+      type: 'UPDATE_CART',
+      masterCartList: newSelection
+    }
+    dispatch(action1)
+
+    const action2 = {
+      type: 'CART_TOTAL',
       cartTotal: newCartTotalPrice
-    })
+    }
+    dispatch(action2)
   }
 
   handleEditClick = () => {

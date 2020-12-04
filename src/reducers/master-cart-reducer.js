@@ -1,7 +1,7 @@
 export default (state = [], action) => {
   const { masterCartList } = action;
   switch(action.type) {
-    case 'ADD_CART':
+    case 'UPDATE_CART':
       return masterCartList
     default: 
       return state

@@ -10,7 +10,7 @@ describe('masterCartListReducer', () => {
   })
   test('Should return new state with added cart part', () => {
       const action = {
-        type: 'ADD_CART',
+        type: 'UPDATE_CART',
         masterCartList: cartClone
       }
       expect(masterCartListReducer({}, action)).toEqual(cartClone);
