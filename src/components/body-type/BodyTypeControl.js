@@ -13,7 +13,6 @@ class BodyTypeControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formVisibleOnPage: false,
       selectedPart: null,
     };
   }
@@ -156,6 +155,7 @@ class BodyTypeControl extends React.Component {
   }
 
   handleClickForm = () => {
+    const { dispatch } = this.props
     if (this.state.selectedPart != null){
       this.setState({
         formVisibleOnPage: false,
@@ -163,9 +163,11 @@ class BodyTypeControl extends React.Component {
         editing: false
       });
     } else {
-      this.setState(prevState => ({
-        formVisibleOnPage: !prevState.formVisibleOnPage
-      }));
+      const action1 = {
+        type: 'FORM_VISIBLE',
+        formVisibleOnPage: !this.props.formVisibleOnPage
+      }
+      dispatch(action1)
     }
   }
 
@@ -224,13 +226,20 @@ class BodyTypeControl extends React.Component {
   }
 
   handleAddingNewPartToList = (newPart) => {
+    const { dispatch } = this.props
     const clone = [...this.props.masterPartList]
     const newSelection = clone[newPart.partBodyType].selection.concat(newPart);    
     clone[newPart.partBodyType].selection = newSelection;
-    this.setState({
-      masterPartList: clone,
+    const action0 = {
+      type: 'UPDATE_PART_LIST',
+      masterPartList: clone
+    }
+    dispatch(action0)
+    const action1 = {
+      type: 'FORM_VISIBLE',
       formVisibleOnPage: false
-    });
+    }
+    dispatch(action1)
   }
 
   render() {
@@ -247,7 +256,7 @@ class BodyTypeControl extends React.Component {
       onClickingEdit = {this.handleEditClick} />
       buttonText = "Return to Armaments";
     }
-    else if (this.state.formVisibleOnPage) {
+    else if (this.props.formVisibleOnPage) {
       currentVisibleState = <NewPartForm onNewPartCreation={this.handleAddingNewPartToList} />;
       buttonText = "Return to Armaments"
     } else {
@@ -296,7 +305,8 @@ BodyTypeControl.propTypes = {
   masterPartList: PropTypes.array,
   masterCartList: PropTypes.array,
   cartTotal: PropTypes.number,
-  editing: PropTypes.bool
+  editing: PropTypes.bool,
+  formVisibleOnPageReducer: PropTypes.bool
 }
 
 const mapStateToProps = state => {
@@ -305,7 +315,8 @@ const mapStateToProps = state => {
     masterPartList: state.masterPartList,
     masterCartList: state.masterCartList,
     cartTotal: state.cartTotal,
-    editing: state.editing
+    editing: state.editing,
+    formVisibleOnPage: state.formVisibleOnPage
   }
 }
 

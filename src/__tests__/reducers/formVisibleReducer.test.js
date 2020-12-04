@@ -9,6 +9,7 @@ describe('formVisibleOnPageReducer', () => {
   test('should return the opposite state when passed in action', () => {
     const action = {
       type: 'FORM_VISIBLE',
+      formVisibleOnPage: true
     }
     expect(formVisibleOnPageReducer(false, action)).toEqual(true);
   })
