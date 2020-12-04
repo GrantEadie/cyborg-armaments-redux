@@ -1,0 +1,165 @@
+@keyframes example {
+  0%   {fill: #212121; stroke: #898989}
+  25%  {fill: #4e4e4e; stroke: #9f9f9f}
+  50%  {fill: rgb(130, 130, 130); stroke: #212121}
+  100% {fill: #212121; stroke: #898989}
+}
+
+#navTitle {
+  font-family: 'Cardo', serif;
+}
+
+.footer {
+  margin-top:100px;
+  width:100%;
+  bottom:0;
+  text-align: center;
+  color: grey;
+}
+.footer a {
+  color: #5bc0debe;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color:#212121;
+  color:white;
+}
+
+.arrow{
+  margin-right:10px;
+  margin-top:30px;
+  margin-bottom:30px;
+}
+
+ul {
+  list-style:none;
+}
+
+hr {
+  border-top:1px solid #5b5b5b;
+}
+
+.itemTitle{
+  font-size:20px;
+}
+
+.detailClick{
+  border: solid 2px transparent;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.detailClick:hover{
+  transition-duration: .2s;
+  cursor:pointer;
+  border-right: solid 2px #5bc0debe;
+}
+
+.detailClick:hover .itemTitle{
+  transition-duration:.2s;
+  color:#5bc0debe;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:100px;
+}
+
+.header h1{
+  font-family: 'Cardo', serif;
+  font-size:75px;
+}
+.header h4{
+  font-size:20px;
+}
+
+p {
+  font-size: 15px;
+}
+
+h2 {
+  color:#5bc0de;
+}
+
+.detailBar{
+  display:inline;
+  padding-right:30px;
+}
+
+#stock{
+  color:#a9a9a9;
+}
+
+.details{
+  margin-bottom:30px;  
+}
+
+.cartDetails .cartTotal{
+  color:white;
+  font-size:20px;
+}
+
+#fancy{
+  margin-top:100px;
+  border-top:1px solid white;
+  margin-bottom:30px;
+}
+
+#humanBody {
+  fill: #212121;
+  stroke: #898989;
+  stroke-width: 1.5px;
+  width:75%;
+  float:right;
+  margin-right:50px;
+  animation-name: example;
+  animation-duration:30s;
+  animation-iteration-count: infinite;
+}
+
+.visionAudio:hover {
+  fill: #5bc0debe;
+  stroke: none;
+  transition-duration:0.2s;
+  cursor:pointer;
+}
+
+.torso:hover {
+  fill: #5bc0debe;
+  stroke: none;
+  transition-duration:0.2s;
+  cursor:pointer;
+}
+
+.hands:hover {
+  fill: #5bc0debe;
+  stroke: none;
+  transition-duration:0.2s;
+  cursor:pointer;
+}
+
+.legs:hover{
+  fill: #5bc0debe;
+  stroke: none;
+  transition-duration:0.2s;
+  cursor:pointer;
+}
+
+.legs:active{
+  fill:white;
+}
+
+.arms:hover{
+  stroke: none;
+  fill: #5bc0debe;
+  transition-duration:0.2s;
+  cursor:pointer;
+}
+
+.head:hover {
+  stroke: none;
+  fill: #5bc0debe;
+  transition-duration:0.2s;
+  cursor:pointer;
+}
