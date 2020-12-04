@@ -5,6 +5,9 @@ import PartDetail from '../part/PartDetail'
 import EditPartForm from '../part/EditPartForm';
 import CartList from '../cart/CartList';
 import BodyTypeSVG from './BodyTypeSVG';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 
 class BodyTypeControl extends React.Component {
   constructor(props) {
@@ -50,7 +53,6 @@ class BodyTypeControl extends React.Component {
 
   handleBodyClick = (event) => {
     const bodyTypeVisible = parseInt(event.currentTarget.id)
-    console.log(bodyTypeVisible);
     this.setState({
       bodyTypeVisibleOnPage: bodyTypeVisible
     })
