@@ -43,6 +43,7 @@ class BodyTypeControl extends React.Component {
       if (clone[currentCatIndex].selection[i].id === id){
 
         const currentPart = clone[currentCatIndex].selection[i];
+        
         if (clone[currentCatIndex].selection[i].partQuantity > 1) {
           clone[currentCatIndex].selection[i].partQuantity = clone[currentCatIndex].selection[i].partQuantity -1;
 
