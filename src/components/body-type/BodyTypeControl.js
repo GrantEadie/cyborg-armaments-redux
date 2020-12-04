@@ -52,15 +52,18 @@ class BodyTypeControl extends React.Component {
   }
 
   handleBodyClick = (event) => {
+    const { dispatch } = this.props
     const bodyTypeVisible = parseInt(event.currentTarget.id)
-    this.setState({
+    const action0 = {
+      type: 'CHANGE_VISIBLE_BODYTYPE',
       bodyTypeVisibleOnPage: bodyTypeVisible
-    })
+    }
+    dispatch(action0);
   }
 
 
   handleBuyClick = (id) => {    
-    const currentCatIndex = this.state.bodyTypeVisibleOnPage;
+    const currentCatIndex = this.props.bodyTypeVisibleOnPage;
     const clone = [...this.state.masterPartList]
     const cartClone = [...this.state.masterCartList]
     let partPrice = 0;
@@ -104,7 +107,7 @@ class BodyTypeControl extends React.Component {
   }
 
   handleEditingPartInList = (partToEdit) => {
-    const currentCatIndex = this.state.bodyTypeVisibleOnPage;
+    const currentCatIndex = this.props.bodyTypeVisibleOnPage;
     const clone = [...this.state.masterPartList]
     const editedSelection = this.state.masterPartList[currentCatIndex].selection
     .filter(part => part.id !== this.state.selectedPart.id)
@@ -170,7 +173,7 @@ class BodyTypeControl extends React.Component {
   }
 
   handleDeletingPart = (id) => {
-    const currentCatIndex = this.state.bodyTypeVisibleOnPage;
+    const currentCatIndex = this.props.bodyTypeVisibleOnPage;
     const clone = [...this.state.masterPartList]
     const newSelection = this.state.masterPartList[currentCatIndex].selection.filter(pro => pro.id !== id);     
     clone[currentCatIndex].selection = newSelection;    
@@ -181,29 +184,44 @@ class BodyTypeControl extends React.Component {
   }  
 
   handleClickUp = () => {
-    if (this.state.bodyTypeVisibleOnPage >= 5) {
-      this.setState({ bodyTypeVisibleOnPage: 0 })
+    const { dispatch } = this.props
+    if (this.props.bodyTypeVisibleOnPage >= 5) {
+      const action0 = {
+        type: 'CHANGE_VISIBLE_BODYTYPE',
+        bodyTypeVisibleOnPage: 0
+      }
+      dispatch(action0);
     }
     else {
-      this.setState(prevState => ({
-        bodyTypeVisibleOnPage: prevState.bodyTypeVisibleOnPage + 1
-      }))
+      const action1 = {
+        type: 'CHANGE_VISIBLE_BODYTYPE',
+        bodyTypeVisibleOnPage: this.props.bodyTypeVisibleOnPage + 1
+      }
+      dispatch(action1)
     }
   }
 
   handleClickDown = () => {
-    if (this.state.bodyTypeVisibleOnPage <= 0) {
-      this.setState({ bodyTypeVisibleOnPage: 5 })
+    console.log("clickdown")
+    const { dispatch } = this.props
+    if (this.props.bodyTypeVisibleOnPage <= 0) {
+      const action0 = {
+        type: 'CHANGE_VISIBLE_BODYTYPE',
+        bodyTypeVisibleOnPage: 5
+      }
+      dispatch(action0)
     }
     else {
-      this.setState(prevState => ({
-        bodyTypeVisibleOnPage: prevState.bodyTypeVisibleOnPage - 1
-      }));
+      const action1 = {
+        type: 'CHANGE_VISIBLE_BODYTYPE',
+        bodyTypeVisibleOnPage: this.props.bodyTypeVisibleOnPage - 1
+      }
+      dispatch(action1)
     }
   }
 
   handleChangingSelectedPart = (id) => {
-    const currentCatIndex = this.state.bodyTypeVisibleOnPage;
+    const currentCatIndex = this.props.bodyTypeVisibleOnPage;
     const selectedPart = this.state.masterPartList[currentCatIndex].selection.filter(pro => pro.id === id)[0];  
     this.setState({selectedPart: selectedPart});
   }
@@ -237,7 +255,7 @@ class BodyTypeControl extends React.Component {
       buttonText = "Return to Armaments"
     } else {
       currentVisibleState = <BodyTypeList
-        currentIndex={this.state.bodyTypeVisibleOnPage} 
+        currentIndex={this.props.bodyTypeVisibleOnPage} 
         availableParts={this.state.masterPartList} 
         onPartSelection={this.handleChangingSelectedPart}
         onBuyPart={this.handleBuyClick}
@@ -262,7 +280,7 @@ class BodyTypeControl extends React.Component {
         {currentVisibleState}
           </div>
           <div className="col-md-4">
-            <BodyTypeSVG onBodyClick={this.handleBodyClick} currentIndex={this.state.bodyTypeVisibleOnPage} />
+            <BodyTypeSVG onBodyClick={this.handleBodyClick} currentIndex={this.props.bodyTypeVisibleOnPage} />
           </div>
         </div>
         <div className="row">
@@ -275,5 +293,17 @@ class BodyTypeControl extends React.Component {
     );
   }
 }
+
+BodyTypeControl.propTypes = {
+  bodyTypeVisibleOnPage: PropTypes.number,
+}
+
+const mapStateToProps = state => {
+  return {
+    bodyTypeVisibleOnPage: state.bodyTypeVisibleOnPage
+  }
+}
+
+BodyTypeControl = connect(mapStateToProps)(BodyTypeControl);
 
 export default BodyTypeControl;

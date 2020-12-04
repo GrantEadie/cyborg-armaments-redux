@@ -9,6 +9,10 @@
   font-family: 'Cardo', serif;
 }
 
+.btn:focus {
+  outline: none !important;
+}
+
 .footer {
   margin-top:100px;
   width:100%;
