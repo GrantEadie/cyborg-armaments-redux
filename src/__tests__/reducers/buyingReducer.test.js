@@ -1,4 +1,4 @@
-import buyingReducer from '../../reducers/buying-returning-reducer'
+import buyingReducer from '../../reducers/master-part-list-reducer'
 import masterPartListDefault from '../../reducers/STARTING_DATA'
 
 describe('buyingReducer', () => {
@@ -14,7 +14,7 @@ describe('buyingReducer', () => {
 
   test('Should return new state when "buying" something', () => {
     const action = {
-      type: 'BUY_PART',
+      type: 'UPDATE_PART_LIST',
       masterPartList: clone
     }
     expect(buyingReducer(defaultState, action)).toEqual(testClone)

@@ -1,5 +1,5 @@
 import bodyTypeVisibleReducer from './bodyType-visible-reducer';
-import masterPartListReducer from './buying-returning-reducer'
+import masterPartListReducer from './master-part-list-reducer'
 import masterCartListReducer from './master-cart-reducer';
 import cartTotalReducer from './cart-total-reducer'
 import { combineReducers } from 'redux';

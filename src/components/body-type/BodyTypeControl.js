@@ -69,7 +69,7 @@ class BodyTypeControl extends React.Component {
     }
     
     const action0 = {
-      type: 'BUY_PART',
+      type: 'UPDATE_PART_LIST',
       masterPartList: clone
     }
     dispatch(action0)
@@ -86,14 +86,19 @@ class BodyTypeControl extends React.Component {
   }
 
   handleEditingPartInList = (partToEdit) => {
+    const { dispatch } = this.props
     const currentCatIndex = this.props.bodyTypeVisibleOnPage;
     const clone = [...this.props.masterPartList]
     const editedSelection = this.props.masterPartList[currentCatIndex].selection
     .filter(part => part.id !== this.state.selectedPart.id)
     .concat(partToEdit);
     clone[currentCatIndex].selection = editedSelection;
+    const action0 = {
+      type: 'UPDATE_PART_LIST',
+      masterPartList: clone
+    }
+    dispatch(action0)
     this.setState({
-      masterPartList: clone,
       editing: false,
       selectedPart: null
     });
