@@ -14,7 +14,6 @@ class BodyTypeControl extends React.Component {
     super(props);
     this.state = {
       cartTotal: 0,
-      masterCartList: [],
       formVisibleOnPage: false,
       selectedPart: null,
       bodyTypeVisibleOnPage: 0,
@@ -37,13 +36,13 @@ class BodyTypeControl extends React.Component {
     const { dispatch } = this.props;
     const currentCatIndex = this.props.bodyTypeVisibleOnPage;
     const clone = [...this.props.masterPartList]
-    const cartClone = [...this.state.masterCartList]
+    const cartClone = [...this.props.masterCartList]
     let partPrice = 0;
     for (let i = 0; i <= clone[currentCatIndex].selection.length; i++){
       if (clone[currentCatIndex].selection[i].id === id){
 
         const currentPart = clone[currentCatIndex].selection[i];
-        
+
         if (clone[currentCatIndex].selection[i].partQuantity > 1) {
           clone[currentCatIndex].selection[i].partQuantity = clone[currentCatIndex].selection[i].partQuantity -1;
 
@@ -75,8 +74,12 @@ class BodyTypeControl extends React.Component {
       masterPartList: clone
     }
     dispatch(action0)
+    const action1 = {
+      type: 'ADD_CART',
+      masterCartList: cartClone
+    }
+    dispatch(action1)
     this.setState({
-      masterCartList: cartClone,
       cartTotal: this.state.cartTotal + partPrice
     });
   }
@@ -119,7 +122,7 @@ class BodyTypeControl extends React.Component {
         }
       }
 
-    const newSelection = this.state.masterCartList.filter(pro => pro.id !== oldPart.id);
+    const newSelection = this.props.masterCartList.filter(pro => pro.id !== oldPart.id);
 
     this.setState({
       masterPartList: clone,
@@ -260,7 +263,7 @@ class BodyTypeControl extends React.Component {
         </div>
         <div className="row">
         <div className="col-md-12">
-          <CartList cartTotal={this.state.cartTotal} onDeleteCartPart={this.handleDeleteCartPart} cartList={this.state.masterCartList}/>
+          <CartList cartTotal={this.state.cartTotal} onDeleteCartPart={this.handleDeleteCartPart} cartList={this.props.masterCartList}/>
           </div>
         </div>
       </div>
@@ -271,13 +274,15 @@ class BodyTypeControl extends React.Component {
 
 BodyTypeControl.propTypes = {
   bodyTypeVisibleOnPage: PropTypes.number,
-  masterPartList: PropTypes.array
+  masterPartList: PropTypes.array,
+  masterCartList: PropTypes.array
 }
 
 const mapStateToProps = state => {
   return {
     bodyTypeVisibleOnPage: state.bodyTypeVisibleOnPage,
-    masterPartList: state.masterPartList
+    masterPartList: state.masterPartList,
+    masterCartList: state.masterCartList
   }
 }
 
