@@ -15,8 +15,6 @@ class BodyTypeControl extends React.Component {
     this.state = {
       formVisibleOnPage: false,
       selectedPart: null,
-      bodyTypeVisibleOnPage: 0,
-      editing: false,
     };
   }
 
@@ -138,8 +136,12 @@ class BodyTypeControl extends React.Component {
   }
 
   handleEditClick = () => {
-
-    this.setState({editing: true});
+    const { dispatch } = this.props
+    const action = {
+      type: 'EDIT',
+      editing: true
+    }
+    dispatch(action);
   }
 
   handleClickForm = () => {
@@ -224,7 +226,7 @@ class BodyTypeControl extends React.Component {
     let currentVisibleState = null;
     let buttonText = null;
 
-    if (this.state.editing){
+    if (this.props.editing){
       currentVisibleState = <EditPartForm part = {this.state.selectedPart} onEditPart = {this.handleEditingPartInList} />
       buttonText = "Return to Armaments";
     } else if (this.state.selectedPart != null) {
@@ -282,7 +284,8 @@ BodyTypeControl.propTypes = {
   bodyTypeVisibleOnPage: PropTypes.number,
   masterPartList: PropTypes.array,
   masterCartList: PropTypes.array,
-  cartTotal: PropTypes.number
+  cartTotal: PropTypes.number,
+  editing: PropTypes.bool
 }
 
 const mapStateToProps = state => {
@@ -290,7 +293,8 @@ const mapStateToProps = state => {
     bodyTypeVisibleOnPage: state.bodyTypeVisibleOnPage,
     masterPartList: state.masterPartList,
     masterCartList: state.masterCartList,
-    cartTotal: state.cartTotal
+    cartTotal: state.cartTotal,
+    editing: state.editing
   }
 }
 
