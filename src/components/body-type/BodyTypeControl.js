@@ -272,7 +272,7 @@ class BodyTypeControl extends React.Component {
 
 BodyTypeControl.propTypes = {
   bodyTypeVisibleOnPage: PropTypes.number,
-  masterPartList: PropType.array
+  masterPartList: PropTypes.array
 }
 
 const mapStateToProps = state => {
