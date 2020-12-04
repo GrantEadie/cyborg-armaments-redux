@@ -1,10 +1,10 @@
+import masterPartListDefault from './STARTING_DATA';
 
-
-export default (state = [], action) => {
-  const { clone } = action;
+export default (state = masterPartListDefault, action) => {
+  const { masterCartList } = action;
   switch (action.type) {
     case 'BUY_PART':
-      return clone
+      return masterCartList
     default: 
       return state;
   }

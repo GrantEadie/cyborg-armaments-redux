@@ -1,8 +1,8 @@
-const x = [
-  {
-    bodyType: "Vision & Auditory",
-    selection: [
-      { partName: "Heat Sensing Visual Conversion", partDescription: "See heat as a ratio of the electromagnet spectrum. Adjusts for many species.", partQuantity: 1, id: 9807, cartTotal: 1, partPrice: 499, partBodyType: "Vision & Auditory" },
+const masterPartListDefault = [
+{
+  bodyType: "Vision & Auditory",
+  selection: [
+    { partName: "Heat Sensing Visual Conversion", partDescription: "See heat as a ratio of the electromagnet spectrum. Adjusts for many species.", partQuantity: 1, id: 9807, cartTotal: 1, partPrice: 499, partBodyType: "Vision & Auditory" },
       { partName: "Gravity Pulse Auditory Sensors", partDescription: "Detects gravity particles in shield plating and converts to readable sound waves.", partQuantity: 4, id:9808, cartTotal: 1, partPrice: 377, partBodyType: "Vision & Auditory"  }
     ]
   },
@@ -27,3 +27,5 @@ const x = [
     selection: [{ partName: "Anarres Transport Scan Module", partDescription: "Detects transport traces up to 700 parsecs", partQuantity: 5, id:93581, cartTotal: 1, partPrice: 679, partBodyType: "External Instruments"  },
     {partName: "Orian Phase Transmitter", partDescription: "Creates phase discharge at a radius of seven kilometers.", partQuantity: 5, id:9308, cartTotal: 1, partPrice: 179, partBodyType: "External Instruments"  }]
   }]
+
+export default masterPartListDefault;

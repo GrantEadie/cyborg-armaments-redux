@@ -62,7 +62,8 @@ class BodyTypeControl extends React.Component {
   }
 
 
-  handleBuyClick = (id) => {    
+  handleBuyClick = (id) => {
+    const { dispatch } = this.props;
     const currentCatIndex = this.props.bodyTypeVisibleOnPage;
     const clone = [...this.state.masterPartList]
     const cartClone = [...this.state.masterCartList]
@@ -97,6 +98,11 @@ class BodyTypeControl extends React.Component {
       }
     }
     
+    const action0 = {
+      type: 'BUY_PART',
+      masterCartList: clone
+    }
+    dispatch(action0)
     this.setState({
       selectedPart: null,
       formVisibleOnPage:false,
