@@ -13,7 +13,6 @@ class BodyTypeControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cartTotal: 0,
       formVisibleOnPage: false,
       selectedPart: null,
       bodyTypeVisibleOnPage: 0,
@@ -62,7 +61,7 @@ class BodyTypeControl extends React.Component {
         };
         if (!match) {
           cartClone.push(currentPart)
-          partPrice = currentPart.partPrice;
+          partPrice = currentPart.partPrice; 
         }
         
         break;        
@@ -79,9 +78,11 @@ class BodyTypeControl extends React.Component {
       masterCartList: cartClone
     }
     dispatch(action1)
-    this.setState({
-      cartTotal: this.state.cartTotal + partPrice
-    });
+    const action2 = {
+      type: 'CART_TOTAL',
+      cartTotal: this.props.cartTotal + partPrice
+    }
+    dispatch(action2)
   }
 
   handleEditingPartInList = (partToEdit) => {
@@ -263,7 +264,7 @@ class BodyTypeControl extends React.Component {
         </div>
         <div className="row">
         <div className="col-md-12">
-          <CartList cartTotal={this.state.cartTotal} onDeleteCartPart={this.handleDeleteCartPart} cartList={this.props.masterCartList}/>
+          <CartList cartTotal={this.props.cartTotal} onDeleteCartPart={this.handleDeleteCartPart} cartList={this.props.masterCartList}/>
           </div>
         </div>
       </div>
@@ -275,14 +276,16 @@ class BodyTypeControl extends React.Component {
 BodyTypeControl.propTypes = {
   bodyTypeVisibleOnPage: PropTypes.number,
   masterPartList: PropTypes.array,
-  masterCartList: PropTypes.array
+  masterCartList: PropTypes.array,
+  cartTotal: PropTypes.number
 }
 
 const mapStateToProps = state => {
   return {
     bodyTypeVisibleOnPage: state.bodyTypeVisibleOnPage,
     masterPartList: state.masterPartList,
-    masterCartList: state.masterCartList
+    masterCartList: state.masterCartList,
+    cartTotal: state.cartTotal
   }
 }
 
