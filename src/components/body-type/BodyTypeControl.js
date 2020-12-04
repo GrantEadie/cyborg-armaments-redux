@@ -75,8 +75,6 @@ class BodyTypeControl extends React.Component {
     }
     dispatch(action0)
     this.setState({
-      selectedPart: null,
-      formVisibleOnPage:false,
       masterCartList: cartClone,
       cartTotal: this.state.cartTotal + partPrice
     });
