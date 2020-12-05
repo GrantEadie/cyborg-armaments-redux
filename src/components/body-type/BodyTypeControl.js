@@ -147,16 +147,8 @@ class BodyTypeControl extends React.Component {
     const clone = [...this.props.masterPartList]
     const newSelection = this.props.masterPartList[currentCatIndex].selection.filter(pro => pro.id !== id);     
     clone[currentCatIndex].selection = newSelection;    
-    const action0 = {
-      type: 'UPDATE_PART_LIST',
-      masterPartList: clone
-    }
+    const action0 = a.updatePartList(clone)
     dispatch(action0)
-    const action1 = {
-      type: 'SELECT_PART',
-      selectedPart: null
-    }
-    dispatch(action1)
     const action2 = a.selectPart(null)
     dispatch(action2)
   }  
@@ -164,17 +156,11 @@ class BodyTypeControl extends React.Component {
   handleClickUp = () => {
     const { dispatch } = this.props
     if (this.props.bodyTypeVisibleOnPage >= 5) {
-      const action0 = {
-        type: 'CHANGE_VISIBLE_BODYTYPE',
-        bodyTypeVisibleOnPage: 0
-      }
+      const action0 = a.bodyTypeVisible(0)
       dispatch(action0);
     }
     else {
-      const action1 = {
-        type: 'CHANGE_VISIBLE_BODYTYPE',
-        bodyTypeVisibleOnPage: this.props.bodyTypeVisibleOnPage + 1
-      }
+      const action1 = a.bodyTypeVisible(this.props.bodyTypeVisibleOnPage + 1)
       dispatch(action1)
     }
   }
@@ -183,17 +169,11 @@ class BodyTypeControl extends React.Component {
     console.log("clickdown")
     const { dispatch } = this.props
     if (this.props.bodyTypeVisibleOnPage <= 0) {
-      const action0 = {
-        type: 'CHANGE_VISIBLE_BODYTYPE',
-        bodyTypeVisibleOnPage: 5
-      }
+      const action0 = a.bodyTypeVisible(5)
       dispatch(action0)
     }
     else {
-      const action1 = {
-        type: 'CHANGE_VISIBLE_BODYTYPE',
-        bodyTypeVisibleOnPage: this.props.bodyTypeVisibleOnPage - 1
-      }
+      const action1 = a.bodyTypeVisible(this.props.bodyTypeVisibleOnPage - 1)
       dispatch(action1)
     }
   }
@@ -202,10 +182,7 @@ class BodyTypeControl extends React.Component {
     const { dispatch } = this.props;
     const currentCatIndex = this.props.bodyTypeVisibleOnPage;
     const selectedPart = this.props.masterPartList[currentCatIndex].selection.filter(pro => pro.id === id)[0];
-    const action0 = {
-      type: 'SELECT_PART',
-      selectedPart: selectedPart
-    }
+    const action0 = a.selectPart(selectedPart)
     dispatch(action0)
   }
 
@@ -214,15 +191,9 @@ class BodyTypeControl extends React.Component {
     const clone = [...this.props.masterPartList]
     const newSelection = clone[newPart.partBodyType].selection.concat(newPart);    
     clone[newPart.partBodyType].selection = newSelection;
-    const action0 = {
-      type: 'UPDATE_PART_LIST',
-      masterPartList: clone
-    }
+    const action0 = a.updatePartList(clone)
     dispatch(action0)
-    const action1 = {
-      type: 'FORM_VISIBLE',
-      formVisibleOnPage: false
-    }
+    const action1 = a.formVisible(false)
     dispatch(action1)
   }
 
