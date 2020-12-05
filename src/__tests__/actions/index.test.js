@@ -44,4 +44,16 @@ describe('parts store actions', () => {
       type: c.SELECT_PART
     })
   })
+  test('cart total should update when inputted integer', () => {
+    expect(actions.cartTotal(5)).toEqual({
+      cartTotal: 5,
+      type: c.CART_TOTAL
+    })
+  })
+  test('changeVisible should return the index of the new visible type', () => {
+    expect(actions.formVisible(7)).toEqual({
+      formVisibleOnPage: 7,
+      type: c.FORM_VISIBLE
+    })
+  })
 })

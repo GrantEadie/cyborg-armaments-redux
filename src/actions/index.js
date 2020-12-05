@@ -34,3 +34,10 @@ export const editPart = (editing) => {
     editing: editing
   }
 }
+
+export const cartTotal = (cartTotal) => {
+  return {
+    type: c.CART_TOTAL,
+    cartTotal: cartTotal
+  }
+}
