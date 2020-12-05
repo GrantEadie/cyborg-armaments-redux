@@ -11,6 +11,8 @@ describe('parts store actions', () => {
   const clone = [...defaultState];
   clone[1].selection[0].partQuantity = clone[1].selection[0].partQuantity -1;
 
+  const cartClone = masterPartListDefault[2].selection[0]
+
   test('update parts should add new parts to the state', () => {
     expect(actions.updatePartList(clone)).toEqual({
       masterPartList: testClone,
@@ -31,6 +33,15 @@ describe('parts store actions', () => {
     })
   })
   test('master cart list should update with new cart', () => {
-    
+    expect(actions.updateCart(cartClone)).toEqual({
+      masterCartList: cartClone,
+      type: c.UPDATE_CART
+    })
+  })
+  test('selected part should return the objec that is selected', () => {
+    expect(actions.selectPart(clone[1].selection[0])).toEqual({
+      selectedPart: clone[1].selection[0],
+      type: c.SELECT_PART
+    })
   })
 })

@@ -1,4 +1,5 @@
-import editingReducer from '../../reducers/editing-reducer'
+import editingReducer from '../../reducers/editing-reducer';
+import * as c from '../../actions/ActionTypes';
 
 describe('editingReducer', () => {
   test('Should return dfault state if no action is triggered', () => {
@@ -6,7 +7,7 @@ describe('editingReducer', () => {
   })
     test('should return updated editing boolean when passed into action', () => {
       const action = {
-        type: 'EDIT',
+        type: c.EDIT,
         editing: true
       }
       expect(editingReducer(false, action)).toEqual(true)
