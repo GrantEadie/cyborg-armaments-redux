@@ -8,7 +8,7 @@ describe('bodyTypeVisibleReducer', () => {
 
     test('Should successfully add new id number to state', () => {
       const action = {
-        type: 'CHANGE_VISIBLE_BODYTYPE',
+        type: 'FORM_VISIBLE',
         bodyTypeVisibleOnPage: 4
       }
       expect(bodyTypeVisibleReducer(3, action)).toEqual(4)

@@ -7,6 +7,7 @@ import CartList from '../cart/CartList';
 import BodyTypeSVG from './BodyTypeSVG';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import * as a from '../actions/index';
 
 
 class BodyTypeControl extends React.Component {
@@ -17,10 +18,7 @@ class BodyTypeControl extends React.Component {
   handleBodyClick = (event) => {
     const { dispatch } = this.props
     const bodyTypeVisible = parseInt(event.currentTarget.id)
-    const action0 = {
-      type: 'CHANGE_VISIBLE_BODYTYPE',
-      bodyTypeVisibleOnPage: bodyTypeVisible
-    }
+    const action0 = a.FORM_VISIBLE
     dispatch(action0);
   }
 
@@ -187,14 +185,14 @@ class BodyTypeControl extends React.Component {
     const { dispatch } = this.props
     if (this.props.bodyTypeVisibleOnPage >= 5) {
       const action0 = {
-        type: 'CHANGE_VISIBLE_BODYTYPE',
+        type: 'FORM_VISIBLE',
         bodyTypeVisibleOnPage: 0
       }
       dispatch(action0);
     }
     else {
       const action1 = {
-        type: 'CHANGE_VISIBLE_BODYTYPE',
+        type: 'FORM_VISIBLE',
         bodyTypeVisibleOnPage: this.props.bodyTypeVisibleOnPage + 1
       }
       dispatch(action1)
@@ -206,14 +204,14 @@ class BodyTypeControl extends React.Component {
     const { dispatch } = this.props
     if (this.props.bodyTypeVisibleOnPage <= 0) {
       const action0 = {
-        type: 'CHANGE_VISIBLE_BODYTYPE',
+        type: 'FORM_VISIBLE',
         bodyTypeVisibleOnPage: 5
       }
       dispatch(action0)
     }
     else {
       const action1 = {
-        type: 'CHANGE_VISIBLE_BODYTYPE',
+        type: 'FORM_VISIBLE',
         bodyTypeVisibleOnPage: this.props.bodyTypeVisibleOnPage - 1
       }
       dispatch(action1)
