@@ -12,6 +12,25 @@ describe('parts store actions', () => {
   clone[1].selection[0].partQuantity = clone[1].selection[0].partQuantity -1;
 
   test('update parts should add new parts to the state', () => {
-    expect()
+    expect(actions.updatePartList(clone)).toEqual({
+      masterPartList: testClone,
+      type: c.UPDATE_PART_LIST
+    })
+  })
+
+  test('edit should return boolean', () => {
+      expect(actions.editPart(true)).toEqual({
+        editing: true,
+        type: c.EDIT
+      })
+    })
+  test('visible page should return boolean', () => {
+    expect(actions.formVisible(true)).toEqual({
+      formVisibleOnPage: true,
+      type: c.FORM_VISIBLE
+    })
+  })
+  test('master cart list should update with new cart', () => {
+    
   })
 })

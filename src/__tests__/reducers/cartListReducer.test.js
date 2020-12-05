@@ -1,5 +1,6 @@
 import masterCartListReducer from '../../reducers/master-cart-reducer'
 import masterPartListDefault from '../../reducers/STARTING_DATA';
+import * as c from '../../actions/ActionTypes';
 
 describe('masterCartListReducer', () => {
 
@@ -10,7 +11,7 @@ describe('masterCartListReducer', () => {
   })
   test('Should return new state with added cart part', () => {
       const action = {
-        type: 'UPDATE_CART',
+        type: c.UPDATE_CART,
         masterCartList: cartClone
       }
       expect(masterCartListReducer({}, action)).toEqual(cartClone);
