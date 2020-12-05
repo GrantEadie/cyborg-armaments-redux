@@ -60,20 +60,11 @@ class BodyTypeControl extends React.Component {
       }
     }
     
-    const action0 = {
-      type: 'UPDATE_PART_LIST',
-      masterPartList: clone
-    }
+    const action0 = a.updatePartList(clone)
     dispatch(action0)
-    const action1 = {
-      type: 'UPDATE_CART',
-      masterCartList: cartClone
-    }
+    const action1 = a.updateCart(cartClone)
     dispatch(action1)
-    const action2 = {
-      type: 'CART_TOTAL',
-      cartTotal: this.props.cartTotal + partPrice
-    }
+    const action2 = a.cartTotal(this.props.cartTotal + partPrice)
     dispatch(action2)
   }
 
@@ -85,11 +76,12 @@ class BodyTypeControl extends React.Component {
     .filter(part => part.id !== this.props.selectedPart.id)
     .concat(partToEdit);
     clone[currentCatIndex].selection = editedSelection;
-    const action0 = {
-      type: 'UPDATE_PART_LIST',
-      masterPartList: clone
-    }
+    const action0 = a.updatePartList(clone)
     dispatch(action0)
+    const action1 = a.editPart(false)
+    dispatch(action1)
+    const action2 = a.selectPart(null)
+    dispatch(action2)
   }
 
   handleDeleteCartPart = (oldPart) => {
@@ -118,48 +110,34 @@ class BodyTypeControl extends React.Component {
       }
 
     const newSelection = this.props.masterCartList.filter(pro => pro.id !== oldPart.id);
-    const action0 = {
-      type: 'UPDATE_PART_LIST',
-      masterPartList: clone
-    }
+    const action0 = a.updatePartList(clone)
     dispatch(action0)
 
-    const action1 = {
-      type: 'UPDATE_CART',
-      masterCartList: newSelection
-    }
+    const action1 = a.updateCart(newSelection)
     dispatch(action1)
 
-    const action2 = {
-      type: 'CART_TOTAL',
-      cartTotal: newCartTotalPrice
-    }
+    const action2 = a.cartTotal(newCartTotalPrice)
     dispatch(action2)
   }
 
   handleEditClick = () => {
     const { dispatch } = this.props
-    const action = {
-      type: 'EDIT',
-      editing: true
-    }
+    const action = a.editPart(true)
     dispatch(action);
   }
 
   handleClickForm = () => {
     const { dispatch } = this.props
     if (this.props.selectedPart != null){
-      this.setState({
-        formVisibleOnPage: false,
-        selectedPart: null,
-        editing: false
-      });
-    } else {
-      const action1 = {
-        type: 'FORM_VISIBLE',
-        formVisibleOnPage: !this.props.formVisibleOnPage
-      }
+      const action1 = a.formVisible(false)
       dispatch(action1)
+      const action2 = a.selectPart(null)
+      dispatch(action2)
+      const action3 = a.editPart(false)
+      dispatch(action3)
+    } else {
+      const action4 = a.formVisible(!this.props.formVisibleOnPage)
+      dispatch(action4)
     }
   }
 
@@ -179,6 +157,8 @@ class BodyTypeControl extends React.Component {
       selectedPart: null
     }
     dispatch(action1)
+    const action2 = a.selectPart(null)
+    dispatch(action2)
   }  
 
   handleClickUp = () => {
