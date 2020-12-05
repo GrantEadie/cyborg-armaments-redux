@@ -41,3 +41,10 @@ export const cartTotal = (cartTotal) => {
     cartTotal: cartTotal
   }
 }
+
+export const bodyTypeVisible = (bodyTypeVisibleOnPage) => {
+  return {
+    type: c.CHANGE_VISIBLE_BODYTYPE,
+    bodyTypeVisibleOnPage: bodyTypeVisibleOnPage
+  }
+}

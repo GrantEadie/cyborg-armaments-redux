@@ -1,4 +1,5 @@
 import bodyTypeVisibleReducer from '../../reducers/bodyType-visible-reducer'
+import * as c from '../../actions/ActionTypes'
 
 describe('bodyTypeVisibleReducer', () => {
 
@@ -8,7 +9,7 @@ describe('bodyTypeVisibleReducer', () => {
 
     test('Should successfully add new id number to state', () => {
       const action = {
-        type: 'FORM_VISIBLE',
+        type: c.CHANGE_VISIBLE_BODYTYPE,
         bodyTypeVisibleOnPage: 4
       }
       expect(bodyTypeVisibleReducer(3, action)).toEqual(4)
