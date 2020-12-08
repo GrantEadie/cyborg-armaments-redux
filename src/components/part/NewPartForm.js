@@ -2,12 +2,22 @@ import React from 'react';
 import PropTypes from "prop-types";
 import { v4 } from 'uuid';
 import ReusableForm from "../ReusableForm";
+import Moment from 'moment';
 
 function NewPartForm(props) {
 
   function handleNewPartFormSubmission(event) {
     event.preventDefault();
-    props.onNewPartCreation({ partName: event.target.partName.value, partDescription: event.target.partDesc.value, partBodyType: event.target.partBodyType.value, partQuantity: event.target.partQuantity.value, id: v4(), cartTotal: 0, partPrice: event.target.partPrice.value })
+    props.onNewPartCreation({ partName: event.target.partName.value, 
+      partDescription: event.target.partDesc.value, 
+      partBodyType: event.target.partBodyType.value, 
+      partQuantity: event.target.partQuantity.value, 
+      id: v4(), 
+      cartTotal: 0, 
+      partPrice: event.target.partPrice.value,
+      timeOpen: new Moment(),
+      formattedWaitTime: new Moment().fromNow(true)
+    })
   }
 
   return (

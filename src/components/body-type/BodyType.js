@@ -24,7 +24,9 @@ function BodyType(props){
         partQuantity={part.partQuantity}  
         partPrice={part.partPrice}           
         id={part.id}
-        key={part.key}/>
+        key={part.key}
+        formattedWaitTime = {part.formattedWaitTime}
+        />
         </li>
         )}
       </ul>

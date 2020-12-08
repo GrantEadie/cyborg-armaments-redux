@@ -5,3 +5,4 @@ export const FORM_VISIBLE = 'FORM_VISIBLE';
 export const EDIT = 'EDIT';
 export const CART_TOTAL = 'CART_TOTAL';
 export const UPDATE_CART = 'UPDATE_CART';
+export const UPDATE_TIME = 'UPDATE_TIME';

@@ -11,7 +11,7 @@ function BodyTypeList(props) {
         selection={props.availableParts[props.currentIndex].selection}
         onPartSelection={props.onPartSelection}
         onBuyPart={props.onBuyPart}
-        
+
         />
     </React.Fragment>
   );  

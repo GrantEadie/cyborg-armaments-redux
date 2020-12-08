@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { v4 } from "uuid";
 
 function EditPartForm(props) {
+  const { part } = props
 
   function handleEditPartFormSubmission(event) {
     event.preventDefault();
@@ -12,7 +13,8 @@ function EditPartForm(props) {
       partDescription: event.target.partDesc.value,
       partBodyType: event.target.partBodyType.value,
       partQuantity: event.target.partQuantity.value,
-      id: v4()
+      id: v4(),
+      timeOpen: part.timeOpen, formattedWaitTime: part.formattedWaitTime
     })
   }
   

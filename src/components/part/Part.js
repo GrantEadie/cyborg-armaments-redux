@@ -9,6 +9,7 @@ function Part(props){
           <div >
             <p className="detailBar">{props.partPrice} ⅊ </p>
             <p className="detailBar">{props.partQuantity} <span id="stock">in stock</span></p>
+            <p>{props.formattedWaitTime}</p>
           </div>
         </div>
         <button className="float-right btn btn-outline-light btn-sm buy" onClick = {() => props.onBuyPart(props.id)}>Add to Cart</button>
